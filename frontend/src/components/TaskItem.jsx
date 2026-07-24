@@ -1,4 +1,4 @@
-export default function TaskItem({ task, onDelete }) {
+export default function TaskItem({ task, onToggle, onDelete }) {
   const formattedDate = task.createdAt
     ? new Date(task.createdAt).toLocaleString(undefined, {
         month: 'short',
@@ -10,9 +10,20 @@ export default function TaskItem({ task, onDelete }) {
 
   return (
     <li className="task-item">
-      <span className="task-item__title">{task.title}</span>
+      <input
+        type="checkbox"
+        checked={!!task.completed}
+        onChange={(e) => onToggle?.(task._id, e.target.checked)}
+        className="task-item__checkbox"
+      />
+      <span
+        className={`task-item__title ${
+          task.completed ? 'task-item__title--completed' : ''
+        }`}
+      >
+        {task.title}
+      </span>
       <span className="task-item__date">{formattedDate}</span>
-      <input type="checkbox" value={task.completed}/>
       <button
         type="button"
         className="task-item__delete"

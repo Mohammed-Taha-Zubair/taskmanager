@@ -6,7 +6,7 @@ import ErrorBanner from './components/ErrorBanner';
 import TaskContent from './components/TaskContent';
 
 function App() {
-  const { tasks, loading, error, submitting, fetchTasks, addTask, removeTask } =
+  const { tasks, loading, error, submitting, fetchTasks, addTask, toggleTask, removeTask } =
     useTasks();
 
   return (
@@ -20,6 +20,7 @@ function App() {
           loading={loading}
           error={error}
           tasks={tasks}
+          onToggle={toggleTask}
           onDelete={removeTask}
         />
       </main>

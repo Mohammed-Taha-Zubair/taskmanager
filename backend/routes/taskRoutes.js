@@ -24,6 +24,20 @@ router.post("/", async (req, res) => {
   }
 });
 
+// Update a task (e.g. toggle completed)
+router.put("/:id", async (req, res) => {
+  try {
+    const updatedTask = await Task.findByIdAndUpdate(
+      req.params.id,
+      { completed: req.body.completed },
+      { new: true }
+    );
+    res.json(updatedTask);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // Delete a task
 router.delete("/:id", async (req, res) => {
   try {

@@ -1,10 +1,10 @@
 import TaskItem from './TaskItem';
 
-export default function TaskList({ tasks, onDelete }) {
+export default function TaskList({ tasks, onToggle, onDelete }) {
   return (
     <ul className="task-list">
       {tasks.map((task) => (
-        <TaskItem key={task._id} task={task} onDelete={onDelete} />
+        <TaskItem key={task._id} task={task} onToggle={onToggle} onDelete={onDelete} />
       ))}
     </ul>
   );

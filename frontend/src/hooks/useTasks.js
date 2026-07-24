@@ -36,6 +36,19 @@ export function useTasks() {
     }
   };
 
+  const toggleTask = async (id, completed) => {
+    setError(null);
+    setTasks((prev) =>
+      prev.map((t) => (t._id === id ? { ...t, completed } : t))
+    );
+    try {
+      await taskApi.updateTask(id, { completed });
+    } catch (err) {
+      setError(err.message);
+      fetchTasks();
+    }
+  };
+
   const removeTask = async (id) => {
     setError(null);
     try {
@@ -53,6 +66,7 @@ export function useTasks() {
     submitting,
     fetchTasks,
     addTask,
+    toggleTask,
     removeTask,
   };
 }
