@@ -1,7 +1,18 @@
 export default function TaskItem({ task, onDelete }) {
+  const formattedDate = task.createdAt
+    ? new Date(task.createdAt).toLocaleString(undefined, {
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      })
+    : '';
+
   return (
     <li className="task-item">
       <span className="task-item__title">{task.title}</span>
+      <span className="task-item__date">{formattedDate}</span>
+      <input type="checkbox" value={task.completed}/>
       <button
         type="button"
         className="task-item__delete"
